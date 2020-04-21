@@ -1,9 +1,13 @@
-import React, { useState, PureComponent } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const Form = ({ members, setMembers }) => {
+const Form = ({ members, setMembers, memberToEdit, setMemberToEdit }) => {
   const [ newMember, setNewMember ] = useState({
     name: '', email: '', role: ''
   })
+
+  useEffect(() => {
+    if(memberToEdit)setNewMember(memberToEdit);
+  }, [memberToEdit])
 
   const handleChange = (e) => {
     setNewMember({...newMember, [e.target.name]: e.target.value})
@@ -17,8 +21,19 @@ const Form = ({ members, setMembers }) => {
     });
   }
 
+  const updateMembers = (e) => {
+    e.preventDefault();
+    const newArr = members;
+    newArr.splice(members.indexOf(memberToEdit), 1, newMember)
+    setMembers([...newArr]);
+    setNewMember({
+      name: '', email: '', role: ''
+    });
+    setMemberToEdit(null);
+  }
+
   return (
-    <form onSubmit={submitMember}>
+    <form onSubmit={(memberToEdit) ? updateMembers : submitMember}>
       <label htmlFor="name">Name:</label>
       <input
         id="name"
