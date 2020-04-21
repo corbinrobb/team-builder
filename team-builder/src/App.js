@@ -10,15 +10,26 @@ const App = () => {
     { name: 'Sara', email: 'sara@email.com', role: 'CTO' }
   ]);
   const [ memberToEdit, setMemberToEdit ] = useState(null);
+  const [ memberToRemove, setMemberToRemove ] = useState(null);
 
   const edit = (member) => {
     setMemberToEdit(member);
   }
 
+  const remove = (member) => {
+    setMemberToRemove(member)
+  }
+
+   const removeMember = (key) => {
+    let arr = [...members];
+    arr.splice(key, 1)
+    setMembers(arr);
+  }
+
   return (
     <div>
-      <Form setMemberToEdit={setMemberToEdit} memberToEdit={memberToEdit} setMembers={setMembers} members={members} setMembers={setMembers} />
-      <MemberList edit={edit} setMembers={setMembers} members={members} />
+      <Form setMemberToEdit={setMemberToEdit} memberToEdit={memberToEdit} setMembers={setMembers} members={members} />
+      <MemberList removeMember={removeMember} edit={edit} setMembers={setMembers} members={members} />
     </div>
   );
 }

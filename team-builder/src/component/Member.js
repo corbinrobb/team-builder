@@ -8,11 +8,9 @@ const Member = (props) => {
       <h3>Name: {name}</h3>
       <h3>Email: {email}</h3>
       <h3>Role: {role}</h3>
-      <button onClick={(e) => {
-        e.preventDefault();
-        props.removeMember(props.id);
-      }
-      }>Remove</button>
+      <button onClick={() => { props.removeMember(props.id) }}>
+        Remove
+      </button>
       <button onClick={() => props.edit(props.member)}>
         Edit
       </button>

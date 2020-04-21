@@ -58,7 +58,7 @@ const Form = ({ members, setMembers, memberToEdit, setMemberToEdit }) => {
         value={newMember.role}
         onChange={handleChange}
       />
-      <button type="submit">Add Member</button>
+      <button type="submit">{(memberToEdit) ? 'Edit Member' : 'Add Member'}</button>
     </form>
   );
 }
